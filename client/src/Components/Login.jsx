@@ -25,7 +25,7 @@ export default function LabTabs() {
   };
 
   const handleRegister = (event) => {
-    axios.post('http://localhost:3000/register', JSON.stringify(credentials) ,{headers: {
+    axios.post('http://localhost:3001/register', JSON.stringify(credentials) ,{headers: {
       'Content-Type': 'application/json'
     }})
     .then(function (response) {
@@ -42,7 +42,7 @@ export default function LabTabs() {
 
   const handleLogin = (event) => {
     console.log(credentials);
-    axios.post('http://localhost:3000/login', JSON.stringify(credentials) ,{headers: {
+    axios.post('http://localhost:3001/login', JSON.stringify(credentials) ,{headers: {
       'Content-Type': 'application/json'
     }})
     .then(function (response) {
