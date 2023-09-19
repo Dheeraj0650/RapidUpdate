@@ -1,0 +1,174 @@
+#root {
+    padding: 0;
+}
+
+.navbar {
+    background-color: #fff;
+}
+
+.main-container{
+    margin-top: 6rem;
+}
+
+.control textarea{
+    height: 60vh;
+}
+
+.MuiBox-root{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+.MuiTabs-flexContainer{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.MuiTabPanel-root{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.MuiTabPanel-root .login-tab, .MuiTabPanel-root .register-tab, .oauth-tab{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.oauth-tab button{
+  text-align: center;
+}
+
+.oauth-tab button i{
+  float: left;
+  margin-top: 0.3rem;
+  margin-right: 0.3rem;
+} 
+
+.oauth-tab button span{
+  float: left;
+} 
+
+
+*:focus {
+    outline: none !important;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  @media screen and (min-width: 800px) {
+    
+    .homepage{
+        height: 100vh;
+    }
+
+    .nav-button {
+      background-color: white;
+      border-radius: 2rem;
+      height: 2rem;
+      width: 6.8rem;
+      border: 0.1rem solid blue;
+      font-family: 'Noto Sans', sans-serif;
+      color: #596e79;
+      font-weight: bold;
+      padding:0px 20px 0px 20px;
+    }
+  
+    .nav-button:focus {
+      outline: none;
+    }
+  
+    .nav-button:hover {
+      background-color: #6a2c70;
+      color: white;
+      border-color: #6a2c70;
+    }
+  
+    .hover-button {
+      width: 60%;
+      height: 40px;
+      margin: 10px auto;
+      justify-content: center;
+      display: block;
+      color: #fff;
+      background: #e79c2a;
+      font-size: 1em;
+      font-weight: bold;
+      margin-top: 20px;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      transition: .2s ease-in;
+      cursor: pointer;
+    }
+  
+    .hover-button:hover {
+      background: #6d44b8;
+    }
+
+  }
+  
+  @media screen and (max-width: 800px) {
+
+    .homepage{
+        height: 125vh;
+    }
+
+    .nav-button {
+      background-color: white;
+      border-radius: 2rem;
+      height: 3rem;
+      max-width: 20rem;
+      font-size: 1.4rem;
+      border: 0.1rem solid blue;
+      font-family: 'Noto Sans', sans-serif;
+      color: #596e79;
+      font-weight: bold;
+      padding:0px 20px 0px 20px;
+    }
+  
+    .nav-button:focus {
+      outline: none;
+    }
+  
+    .nav-button:hover {
+      background-color: #6a2c70;
+      color: white;
+      border-color: #6a2c70;
+    }
+  
+    .hover-button {
+      width: 65%;
+      height: 50px;
+      margin: 10px auto;
+      justify-content: center;
+      display: block;
+      color: #fff;
+      background: #e79c2a;
+      font-size: 1.4em;
+      font-weight: bold;
+      margin-top: 20px;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      transition: .2s ease-in;
+      cursor: pointer;
+    }
+  
+    .hover-button:hover {
+      background: #6d44b8;
+    }
+
+  }
+
+  
+
+
