@@ -1,6 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch} from "react-redux";
+import { authActions } from "../Store/index";
 
 function Navbar(){
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const username = useSelector(state => state.auth.username);
+
+  useEffect(() => {
+    if(!isLoggedIn){
+        navigate('/');
+    }
+  }, []);
+
+  let logoutHandler = () => {
+    dispatch(authActions.logout());
+  };
+
   return (
     <div class="container-fluid">
         <nav class="navbar fixed-top navbar-expand-lg">
@@ -11,17 +30,39 @@ function Navbar(){
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto" style={{textAlign:"center"}}>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#"><button type="button" className="nav-button">Home</button></a>
+                        <a class="nav-link active" aria-current="page" onClick={() => {navigate('/')}}><button type="button" className="nav-button">Home</button></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><button type="button" className="nav-button">About</button></a>
+                        <a class="nav-link" onClick={() => {navigate('/realtime-text')}}><button type="button" className="nav-button">Rapid Text</button></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><button type="button" className="nav-button">Projects</button></a>
+                        <a class="nav-link" href="#"><button type="button" className="nav-button">Rapid Board</button></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><button type="button" className="nav-button">Contact</button></a>
-                    </li>
+                    {!isLoggedIn && <a class="nav-link" onClick={() => {navigate('/login')}}><button type="button" className="nav-button">Login/Signup</button></a>}
+                    {isLoggedIn  && <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button type="button" className="nav-button dropdown-toggle"><i class="fas fa-user" style={{paddingRight:"1rem"}}></i></button>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">{username}</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" onClick={logoutHandler}>Logout</a></li>
+                        </ul>
+                    </li>}
+                    {/* <li class="nav-item">
+                        {!isLoggedIn && <a class="nav-link" onClick={() => {navigate('/login')}}><button type="button" className="nav-button">Login/Signup</button></a>}
+                        {isLoggedIn  && <div class="btn-group">
+                            <a type="button" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" className="nav-button dropdown-toggle"><i class="fas fa-user" style={{paddingRight:"1rem"}}></i></button>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item">{username}</a>
+                                <a class="dropdown-item" >Another action</a>
+                                <a class="dropdown-item" onClick={logoutHandler}>logout</a>
+                            </div>
+                        </div>
+                        }
+                    </li> */}
                 </ul>
             </div>
         </nav>

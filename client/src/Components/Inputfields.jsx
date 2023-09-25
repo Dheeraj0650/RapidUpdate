@@ -17,8 +17,8 @@ export default function MultilineTextFields(props) {
           label={props.username}
           name={props.username}
           placeholder={"Enter the " + props.username}
-          multiline
           onChange={props.onChange?props.onChange:null}
+          type={props.type}
         />
     </Box>
   );
