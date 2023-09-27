@@ -42,18 +42,22 @@ io.on('connection', (socket) => {
     // console.log(arg);
     console.log('a user connected');
 
-    // mongoose.connection.on('open', function() {
-    //     console.log('Connected to mongo server.');
-    //     const changeStream = mongoose.connection.collection('users').watch();
-    //     changeStream.on('change',(change) => {
-    //         console.log(change);
-    //         socket.emit("change_text_global", change);
-    //     })
-    // });
+    mongoose.connection.on('open', function() {
+        console.log('Connected to mongo server.');
+        const changeStream = mongoose.connection.collection('users').watch();
+        changeStream.on('change',(change) => {
+            
+            // console.log(change);
+            // socket.emit("join_room_global", change);
+        })
+    });
 
     socket.on("join_room", (data) => {
-        console.log("joined room");
         socket.join(data);
+    });
+
+    socket.on("leave_room", (data) => {
+        socket.leave(data);
     });
 
     socket.on("change_text", (data) => {
@@ -90,7 +94,8 @@ const userSchema = new mongoose.Schema({
 
 const realTimeTextSchema = new mongoose.Schema({
     email:String,
-    realtimetext:String
+    realtimetext:String,
+    room: Object
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -158,16 +163,47 @@ app.post("/realtime-text", async (req, res) => {
     const filter = {'email': req.body.username};
 
     if(req.body.type === "push"){
-        const update = { 'realtimetext': req.body.realtimetext};
+        const realTimeData = await RealTimeText.findOne(filter);
+        const update = { 'realtimetext': req.body.realtimetext, 'room': realTimeData._id};
+        console.log(realTimeData._id);
 
-        const realTimeData = await RealTimeText.findOneAndUpdate(filter, update);
-        res.send(JSON.stringify(realTimeData));
+        const realTimeDataUpdate = await RealTimeText.findOneAndUpdate(filter, update);
+        res.send(JSON.stringify(realTimeDataUpdate));
     }
     else if(req.body.type === "pull"){
         const realTimeData = await RealTimeText.findOne(filter);
         console.log(realTimeData)
         res.send(realTimeData);
     }
+});
+
+app.get("/all_users", async (req, res) => {
+    const realTimeData = await RealTimeText.find();
+    console.log(realTimeData)
+    res.send(realTimeData);
+});
+
+app.post("/update_room", async (req, res) => {
+    console.log("in")
+    const filter = {'email': req.body.current_username};
+    const realTimeData = await RealTimeText.findOne(filter);
+    const realTimeDataUpdate = await RealTimeText.findOneAndUpdate(filter, {'room': req.body.type === "left" ? realTimeData._id:""});
+
+    for(var idx = 0; idx < req.body.usernames.length; idx++){  
+        console.log(req.body.usernames[idx]);
+        var username = req.body.usernames[idx];  
+        const filter = {'email': username};
+        var update = {};
+        if(req.body.type === "left"){
+            update = { 'realtimetext': realTimeData.realtimetext, 'room': realTimeData._id};
+        }
+        else {
+            update = { 'realtimetext': realTimeData.realtimetext, 'room': ""};
+        }
+        const realTimeDataUpdate = await RealTimeText.findOneAndUpdate(filter, update);
+    }
+    
+    res.send({room_id: realTimeData._id, type: req.body.type});
 });
 
 app.get("'/logout", (req, res) =>{

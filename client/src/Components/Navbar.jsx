@@ -22,7 +22,7 @@ function Navbar(){
 
   return (
     <div class="container-fluid">
-        <nav class="navbar fixed-top navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="#"><img src="logo.png" style={{width:"3rem", marginBottom:"0.7rem", marginRight:"0.5rem", marginLeft:"0.5rem"}}></img><span style={{fontFamily: "'Amatic SC', cursive", fontSize:"2.3rem"}}>RAPID</span><span style={{fontFamily: "'Bree Serif', serif", fontSize:"1.5rem"}}>.update</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

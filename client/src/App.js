@@ -36,6 +36,7 @@ function App() {
       element: <div className="App container-fluid"><Navbar></Navbar><Outlet/></div>,
       children : [
         {path:'/', element:<Homepage />},
+        {path:'/', element:<Homepage />},
         {path:'/login', element: <div className="container-fluid main-container"><Login></Login></div>},
         {path:'/realtime-text', element:  <Textarea></Textarea>}
       ]
