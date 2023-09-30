@@ -1,0 +1,11 @@
+version: "3"
+services:
+  frontend:
+    image: "dheeraj0650/rapidupdateclient:1.0"
+    stdin_open: true
+    ports:
+      - "3000:3000"
+  backend:
+    image: "dheeraj0650/rapidupdateserver:1.0"
+    ports:
+      - "3001:8000"
