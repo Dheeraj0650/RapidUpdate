@@ -35,9 +35,6 @@ function Navbar(){
                     <li class="nav-item">
                         <a class="nav-link" onClick={() => {navigate('/realtime-text')}}><button type="button" className="nav-button">Rapid Text</button></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><button type="button" className="nav-button">Rapid Board</button></a>
-                    </li>
                     {!isLoggedIn && <a class="nav-link" onClick={() => {navigate('/login')}}><button type="button" className="nav-button">Login/Signup</button></a>}
                     {isLoggedIn  && <li class="nav-item dropdown">
                         <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

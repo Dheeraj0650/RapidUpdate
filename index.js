@@ -117,7 +117,7 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.get("/", (req, res) => {
-    console.log(__dirname);
+    res.send("<h1>Hello World</h1>");
 });
 
 app.post("/register", (req, res) => {

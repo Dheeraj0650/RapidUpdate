@@ -5,6 +5,20 @@ const initialAuthState = {
     isLoggedIn: false,
     username:''
   };
+
+const realtimeTextState = {
+    details: '',
+};
+
+const realtimeTextSlice = createSlice({
+  name: 'realtimeText_result',
+  initialState: realtimeTextState,
+  reducers: {
+    setRealtimeText(state,action) {
+      state.details = action.payload;
+    }
+  },
+});
   
 const authSlice = createSlice({
     name: 'authentication',
@@ -28,10 +42,11 @@ const authSlice = createSlice({
   });
 
   const store = configureStore({
-    reducer: { auth: authSlice.reducer},
+    reducer: { auth: authSlice.reducer, realtimeTextResult: realtimeTextSlice.reducer},
   });
   
   const authActions = authSlice.actions;
-  
-  export {authActions};
+  const realtimeTextResult = realtimeTextSlice.actions;
+
+  export {authActions, realtimeTextResult};
   export default store;

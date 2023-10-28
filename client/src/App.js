@@ -5,7 +5,7 @@ import Textarea from "./Components/Textarea";
 import Login from "./Components/Login";
 import Cookies from 'js-cookie';
 import { authActions } from "./Store/index";
-import { useSelector, useDispatch} from "react-redux";
+import { useDispatch} from "react-redux";
 import {createBrowserRouter, BrowserRouter as Router, Routes , Route, Outlet, RouterProvider, redirect} from 'react-router-dom';
 
 import '@fontsource/roboto/300.css';
