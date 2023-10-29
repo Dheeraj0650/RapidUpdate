@@ -15,6 +15,3 @@ ENV mongodb_password=Fc5tJsrwWijFEEBJ \
 EXPOSE 8000
 
 CMD ["node", "index.js"]
-
-
-

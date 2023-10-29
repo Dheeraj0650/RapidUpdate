@@ -113,7 +113,7 @@ export default function LabTabs() {
 
   const handleRegister = (event) => {
     if(emailState.isValid && passwordState.isValid){
-      axios.post('http://localhost:3001/register', {username: emailState.value.toLowerCase().trim(), password: passwordState.value.trim()} ,{
+      axios.post('http://54.219.224.67:3001/register', {username: emailState.value.toLowerCase().trim(), password: passwordState.value.trim()} ,{
         withCredentials: true,
         credentials: 'include'
       })
@@ -146,7 +146,7 @@ export default function LabTabs() {
     console.log(emailState);
       console.log(passwordState);
     if(emailState.isValid && passwordState.isValid){
-        axios.post('http://localhost:3001/login', {username: emailState.value, password: passwordState.value}, {
+        axios.post('http://54.219.224.67:3001/login', {username: emailState.value, password: passwordState.value}, {
           withCredentials: true, 
           credentials: 'include'
         })

@@ -8,7 +8,7 @@ import ConnectionList from './ConnectionList';
 import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
 
-const socket = io('http://localhost:3001');
+const socket = io('http://54.219.224.67:3001');
 
 function Textarea(){
 
@@ -52,7 +52,7 @@ function Textarea(){
             console.log(username)
             console.log(room);
             console.log("inside2")
-            axios.post('http://localhost:3001/realtime-text', {type:'push' , username: username, realtimetext: data }  ,{
+            axios.post('http://54.219.224.67:3001/realtime-text', {type:'push' , username: username, realtimetext: data }  ,{
                 withCredentials: true,
                 credentials: 'include'
             }).then(function(response){
@@ -72,7 +72,7 @@ function Textarea(){
             console.log("inside1")
             console.log(username)
             console.log("inside2")
-            axios.post('http://localhost:3001/realtime-text', {type:'pull' , username: username} ,{
+            axios.post('http://54.219.224.67:3001/realtime-text', {type:'pull' , username: username} ,{
                 withCredentials: true,
                 credentials: 'include'
             }).then(function(response){
@@ -82,7 +82,7 @@ function Textarea(){
             })
         }
 
-        axios.post('http://localhost:3001/get_room', {username: username} ,{
+        axios.post('http://54.219.224.67:3001/get_room', {username: username} ,{
             withCredentials: true,
             credentials: 'include'
         }).then(function(response){
@@ -105,7 +105,7 @@ function Textarea(){
         console.log(room)
         console.log("inside2")
 
-        axios.post('http://localhost:3001/realtime-text', {type:'push' , username: username, realtimetext: event.target.value, room:room} ,{
+        axios.post('http://54.219.224.67:3001/realtime-text', {type:'push' , username: username, realtimetext: event.target.value, room:room} ,{
             withCredentials: true,
             credentials: 'include'
         }).then(function(response){
@@ -124,7 +124,7 @@ function Textarea(){
     }
 
     function handleCreateRoom() {
-        axios.post('http://localhost:3001/create_room', {username: username} ,{
+        axios.post('http://54.219.224.67:3001/create_room', {username: username} ,{
             withCredentials: true,
             credentials: 'include'
         }).then(function(response){
@@ -137,7 +137,7 @@ function Textarea(){
     }
 
     function handleExitRoom() {
-        axios.post('http://localhost:3001/exit_room', {username: username} ,{
+        axios.post('http://54.219.224.67:3001/exit_room', {username: username} ,{
             withCredentials: true,
             credentials: 'include'
         }).then(function(response){
