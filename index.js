@@ -116,7 +116,7 @@ passport.serializeUser(User.serializeUser(function(){
 passport.deserializeUser(User.deserializeUser());
 
 
-app.get("/", (req, res) => {
+app.get("/hello", (req, res) => {
     res.send("<h1>Hello World</h1>");
 });
 
