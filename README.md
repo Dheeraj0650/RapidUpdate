@@ -13,6 +13,8 @@ Rapidupdate is a cutting-edge full stack application that offers real-time text 
 - **Real-time Communication:** Utilizes Socket.io to establish two-way communication and maintain real-time data synchronization among users.
 - **Resilience:** The system is designed to automatically restart all services even after system reboots, ensuring uninterrupted operation.
 
+![Projects - Page 1-2](https://github.com/Dheeraj0650/Rapidupdate/assets/41461773/58cc6359-ab2b-46fe-8b35-08cb93b52124)
+
 ## Workflow
 
 1. **Login/Register**: Users can access the application by registering with a username and password, ensuring personalized experiences.
