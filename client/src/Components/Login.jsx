@@ -1,4 +1,4 @@
-import react, {useState, useEffect, useReducer} from 'react';
+import {useState, useEffect, useReducer} from 'react';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -12,11 +12,18 @@ import { string } from 'prop-types';
 import { authActions } from "../Store/index";
 import { useSelector, useDispatch} from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 
 export default function LabTabs() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+
+  useEffect(() => {
+    if(isLoggedIn){
+        navigate('/');
+    }
+  }, []);
 
   const emailReducer = (state, action) => {
     if(action.type === "set"){
@@ -35,6 +42,7 @@ export default function LabTabs() {
   }
 
   const [value, setValue] = useState('1');
+
   useEffect(()=>{
     dispatchEmail({type:"set", value: ""});
     dispatchPassword({type:"set", value:""});
@@ -113,7 +121,7 @@ export default function LabTabs() {
 
   const handleRegister = (event) => {
     if(emailState.isValid && passwordState.isValid){
-      axios.post('http://54.219.224.67:3001/register', {username: emailState.value.toLowerCase().trim(), password: passwordState.value.trim()} ,{
+      axios.post('http://localhost:3001/register', {username: emailState.value.toLowerCase().trim(), password: passwordState.value.trim()} ,{
         withCredentials: true,
         credentials: 'include'
       })
@@ -146,7 +154,7 @@ export default function LabTabs() {
     console.log(emailState);
       console.log(passwordState);
     if(emailState.isValid && passwordState.isValid){
-        axios.post('http://54.219.224.67:3001/login', {username: emailState.value, password: passwordState.value}, {
+        axios.post('http://localhost:3001/login', {username: emailState.value, password: passwordState.value}, {
           withCredentials: true, 
           credentials: 'include'
         })
@@ -200,7 +208,6 @@ export default function LabTabs() {
               <TabList onChange={handleChange} aria-label="lab API tabs example">
                 <Tab label="Login" value="1" />
                 <Tab label="Sign up" value="2" />
-                <Tab label="OAuth" value="3" />
               </TabList>
             </Box>
             <TabPanel value="1">
@@ -223,13 +230,6 @@ export default function LabTabs() {
                     {passwordState.isValid === false && <span style={{fontSize:"0.8rem", marginLeft:"0.5rem", textAlign:"fill", width:"16rem", color:'red'}}>Invalid password. password should include 1. length greater than or equal to 8, 2. least one uppercase letter, 3. at least one lowercase letter, 4. at least one number, 5. at least one special character</span>}
                     {alert.show && <Alert context={alert.context} text={alert.text}></Alert>}
                     <Button type="submit" text="Register" onClick={handleRegister}></Button>
-              </div>
-            </TabPanel>
-            <TabPanel value="3">
-              <div className='oauth-tab'>
-                <button type="button" class="btn btn-outline-primary"><i class="fa-brands fa-google"></i><span>google</span></button>
-                <button type="button" class="btn btn-outline-info"><i class="fa-brands fa-linkedin"></i><span>LinkedIn</span></button>
-                <button type="button" class="btn btn-outline-dark"><i class="fa-brands fa-github"></i><span>Github</span></button>
               </div>
             </TabPanel>
           </TabContext>

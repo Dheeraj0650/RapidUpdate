@@ -7,8 +7,10 @@ import Button from '@mui/material/Button';
 import ConnectionList from './ConnectionList';
 import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
+import { useQuill } from 'react-quilljs';
+import 'quill/dist/quill.snow.css';
 
-const socket = io('http://54.219.224.67:3001');
+const socket = io('http://localhost:3001');
 
 function Textarea(){
 
@@ -19,6 +21,7 @@ function Textarea(){
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
     const username = useSelector(state => state.auth.username);
     const [room, setRoom] = useState(""); 
+
 
     const Backdrop = (props) => {
         return <div className="backdrop"/>;
@@ -52,7 +55,7 @@ function Textarea(){
             console.log(username)
             console.log(room);
             console.log("inside2")
-            axios.post('http://54.219.224.67:3001/realtime-text', {type:'push' , username: username, realtimetext: data }  ,{
+            axios.post('http://localhost:3001/realtime-text', {type:'push' , username: username, realtimetext: data }  ,{
                 withCredentials: true,
                 credentials: 'include'
             }).then(function(response){
@@ -72,7 +75,7 @@ function Textarea(){
             console.log("inside1")
             console.log(username)
             console.log("inside2")
-            axios.post('http://54.219.224.67:3001/realtime-text', {type:'pull' , username: username} ,{
+            axios.post('http://localhost:3001/realtime-text', {type:'pull' , username: username} ,{
                 withCredentials: true,
                 credentials: 'include'
             }).then(function(response){
@@ -82,7 +85,7 @@ function Textarea(){
             })
         }
 
-        axios.post('http://54.219.224.67:3001/get_room', {username: username} ,{
+        axios.post('http://localhost:3001/get_room', {username: username} ,{
             withCredentials: true,
             credentials: 'include'
         }).then(function(response){
@@ -105,7 +108,7 @@ function Textarea(){
         console.log(room)
         console.log("inside2")
 
-        axios.post('http://54.219.224.67:3001/realtime-text', {type:'push' , username: username, realtimetext: event.target.value, room:room} ,{
+        axios.post('http://localhost:3001/realtime-text', {type:'push' , username: username, realtimetext: event.target.value, room:room} ,{
             withCredentials: true,
             credentials: 'include'
         }).then(function(response){
@@ -124,7 +127,7 @@ function Textarea(){
     }
 
     function handleCreateRoom() {
-        axios.post('http://54.219.224.67:3001/create_room', {username: username} ,{
+        axios.post('http://localhost:3001/create_room', {username: username} ,{
             withCredentials: true,
             credentials: 'include'
         }).then(function(response){
@@ -137,13 +140,14 @@ function Textarea(){
     }
 
     function handleExitRoom() {
-        axios.post('http://54.219.224.67:3001/exit_room', {username: username} ,{
+        axios.post('http://localhost:3001/exit_room', {username: username} ,{
             withCredentials: true,
             credentials: 'include'
         }).then(function(response){
             console.log(response.data);
             socket.emit("leave_room", room);
-            setRoom(response.data);
+            socket.emit("change_text", {realtimetext:"", room:room});
+            setRoom("");
         }).catch(function(error){
 
         })

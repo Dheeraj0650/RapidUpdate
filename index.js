@@ -26,14 +26,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: "http://54.219.224.67:3000",
+    origin: "http://localhost:3000",
     credentials: true,
     withCredentials:true
 }))
 
 const io = new Server(server, {
     cors:{
-        origin:"http://54.219.224.67:3000",
+        origin:"http://localhost:3000",
         methods: ["GET", "POST"]
     }
 });
@@ -64,7 +64,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on("change_text", (data) => {
-        socket.to(data.room).emit("change_text_global", data.realtimetext)
+        console.log("a");
+        console.log(data.room)
+        if(data.room !== ''){
+            socket.to(data.room).emit("change_text_global", data.realtimetext)
+        }
     });
 });
 
