@@ -30,7 +30,7 @@ export default function TransferList(props) {
   const rightChecked = intersection(checked, right);
 
   function handleRoom(usernames, type){
-    axios.post('http://localhost:3001/update_room', {usernames: usernames, current_username: props.username, type: type})
+    axios.post('http://54.176.90.137:3001/update_room', {usernames: usernames, current_username: props.username, type: type})
     .then(function (response) {
       console.log(response.data);
       // if(response.data.type === "left"){
@@ -49,7 +49,7 @@ export default function TransferList(props) {
   }
 
   if(left.length === 0 && right.length === 0){
-    axios.get('http://localhost:3001/all_users')
+    axios.get('http://54.176.90.137:3001/all_users')
       .then(function (response) {
         const all_users = response.data;
         console.log(all_users);
