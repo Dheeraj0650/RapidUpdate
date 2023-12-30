@@ -26,14 +26,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "http://54.176.90.137:3000",
     credentials: true,
     withCredentials:true
 }))
 
 const io = new Server(server, {
     cors:{
-        origin:"http://localhost:3000",
+        origin:"http://54.176.90.137:3000",
         methods: ["GET", "POST"]
     }
 });

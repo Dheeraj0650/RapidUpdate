@@ -10,7 +10,7 @@ import Chip from '@mui/material/Chip';
 import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css';
 
-const socket = io('http://localhost:3001');
+const socket = io('http://54.176.90.137:3001');
 
 function Textarea(){
 
